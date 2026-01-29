@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home - Pet Training System</title>
+  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="top-bar">
+    <img src="Pet logo.png" alt="Buddy Bell Logo" class="logo">
+    <h1>Buddy Bell</h1>
+    <div class="search-container">
+      <input type="text" id="pet-name" placeholder="Enter Pet Name">
+      <button onclick="submitPetName()" class="search-button">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+    <div class="settings-icon" onclick="openSettings()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="sidebar">
+      <a href="home.html" class="nav-link"><i class="fas fa-house"></i> Home</a>
+      <a href="feeding.html" class="nav-link"><i class="fas fa-bone"></i> Feeding Reminder</a>
+      <a href="vet.html" class="nav-link"><i class="fas fa-stethoscope"></i>  Vet Appointments</a>
+      <a href="training.html" class="nav-link"><i class="fas fa-dumbbell"></i>  Basic Training</a>
+      <a href="activity-tracker.html" class="nav-link"><i class="fas fa-chart-line"></i>  Activity Tracker</a>
+      <a href="multiple-pet-profile.html" class="nav-link"><i class="fas fa-paw"></i> Multiple Pets Profile</a>
+    </div>
+  <title>Activity Tracker</title>
+<style>
+* { box-sizing: border-box; }
+  body {
+  font-family: Arial, sans-serif;
+  background: #FFFDF8;
+  margin: 0;    
+}
+
+.container {
+  background: #f9f1e7;
+  border-radius: 12px;
+  padding: 40px;
+  width: 80%;
+  margin: 40px auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+ }
+
+ button {
+  padding: 14px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: 2px solid brown;
+  background-color: #f9f1e7;
+  color: brown;
+  border-radius: 8px;
+  margin: 10px auto;
+  width: 200px; /* More prominent width */
+  display: block; /* Center the button */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+  background-color: brown;
+  color: beige;
+}
+
+ 
+
+ .nav-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+ }
+
+ .nav-button .circle {
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  border-radius: 50%;
+ }
+
+ .nav-button.active {
+  background-color: #eee;
+ }
+
+ .nav-button:hover:not(.active) {
+  background-color: #f5f5f5;
+ }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    }
+
+  .days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .day {
+    width: 60px; /* Increased from 40px */
+    height: 60px; /* Increased from 40px */
+    font-size: 1.2rem; /* Larger text */
+    border-radius: 50%;
+    background: #f9f1e7;
+    color: brown;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background 0.3s, border-color 0.3s;
+ }
+
+.day.active {
+  background: brown;
+  color: beige;
+  border-color: brown;
+}
+
+.activity-form {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.activity-form label {
+  display: block;
+  margin: 5px 0;
+}
+.activity-form input {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.activities {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+  .activity {
+  border: 2px solid brown;
+  font-size: 0.9rem; 
+  background-color: #f9f1e7;
+  color: brown;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  flex: 1 1 30%;
+  min-width: 100px;
+  margin: 5px;
+}
+.circle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.progress-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(brown 0%, #f9f1e7 0%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+ }
+
+ .progress-inner {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+
+ .progress-text {
+  font-size: 14px;
+  color: #000;
+  font-weight: bold;
+ }
+
+ .percentage-label {
+  position: absolute;
+  top: -20px;
+  font-size: 14px;
+  color: brown;
+ }
+ .input-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+ }
+
+ .input-row label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  min-width: 180px;
+  justify-content: space-between;
+ }
+
+
+ .input-row input {
+  padding: 8px 10px;
+  width: 100px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+ }
+ @media (max-width: 600px) {
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+ }
+
+ @media (max-width: 500px) {
+  .activities {
+    flex-direction: column;
+    align-items: center;
+}
+      
+.activity {
+    width: 100%;
+    max-width: 300px;
+}
+}
+
+.button-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>ACTIVITY TRACKER</h2>
+
+    <div class="days" id="days">
+      <div class="day" data-day="Sunday">S</div>
+      <div class="day" data-day="Monday">M</div>
+      <div class="day" data-day="Tuesday">T</div>
+      <div class="day" data-day="Wednesday">W</div>
+      <div class="day" data-day="Thursday">T</div>
+      <div class="day" data-day="Friday">F</div>
+      <div class="day" data-day="Saturday">S</div>
+
+    </div>
+
+    <div class="activity-form">
+      <div class="input-row">
+        <label>Walking: <input type="number" id="walking" /></label>
+        <label>Training: <input type="number" id="training" /></label>
+        <label>Playdate: <input type="number" id="playdate" /></label>
+      </div>
+      <div class="button-group">
+      <button onclick="saveActivity()">Save</button>
+      <button onclick="resetActivity()">Reset</button>
+    </div>
+    </div>
+
+    <div class="activities" id="activityDisplay">
+      <div class="activity"><strong>Walking</strong><br><span id="showWalking">0</span> mins</div>
+      <div class="activity"><strong>Training</strong><br><span id="showTraining">0</span> mins</div>
+      <div class="activity"><strong>Playdate</strong><br><span id="showPlaydate">0</span> mins</div>
+    </div>
+
+    <div class="circle-container">
+      <div class="progress-circle" id="progress">
+        <div class="percentage-label" id="percentage">0%</div>
+        <div class="progress-inner">
+          <div style="text-align: center;">
+            <div style="font-size: 12px; color: brown;">Total Minutes</div>
+            <div class="progress-text" id="progressText">0 / 120</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 10px; font-size: 14px; color: brown;">Daily Goal: 120 mins</div>
+    </div>
+    
+  </div>
+
+  <script>
+    let selectedDay = "Monday";
+
+    document.querySelectorAll(".day").forEach(day => {
+      day.addEventListener("click", () => {
+        document.querySelectorAll(".day").forEach(d => d.classList.remove("active"));
+        day.classList.add("active");
+        selectedDay = day.dataset.day;
+        loadActivity();
+      });
+    });
+
+    function saveActivity() {
+  const walking = parseInt(document.getElementById("walking").value) || 0;
+  const training = parseInt(document.getElementById("training").value) || 0;
+  const playdate = parseInt(document.getElementById("playdate").value) || 0;
+
+  const data = { walking, training, playdate };
+  localStorage.setItem(`activity_${selectedDay}`, JSON.stringify(data));
+  loadActivity();
+
+  // Clear input fields after saving
+  document.getElementById("walking").value = '';
+  document.getElementById("training").value = '';
+  document.getElementById("playdate").value = '';
+ }
+ 
+function resetActivity() {
+  localStorage.removeItem(`activity_${selectedDay}`);
+
+  document.getElementById("walking").value = '';
+  document.getElementById("training").value = '';
+  document.getElementById("playdate").value = '';
+
+  loadActivity();
+}
+
+    function loadActivity() {
+  const stored = localStorage.getItem(`activity_${selectedDay}`);
+  const activity = stored ? JSON.parse(stored) : { walking: 0, training: 0, playdate: 0 };
+
+  document.getElementById("showWalking").textContent = activity.walking;
+  document.getElementById("showTraining").textContent = activity.training;
+  document.getElementById("showPlaydate").textContent = activity.playdate;
+
+  const total = activity.walking + activity.training + activity.playdate;
+  const percent = Math.min((total / 120) * 100, 100); // cap at 100%
+
+  const progress = document.getElementById("progress");
+  progress.style.background = `conic-gradient(brown ${percent}%, beige ${percent}%)`;
+
+  document.getElementById("progressText").textContent = `${total} / 120`;
+  document.getElementById("percentage").textContent = `${Math.round(percent)}%`;
+}
+
+
+
+    document.querySelector('.day[data-day="Monday"]').classList.add("active");
+    loadActivity();
+  </script>
+</body>
+</html>
